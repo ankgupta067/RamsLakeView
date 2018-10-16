@@ -59,7 +59,9 @@ namespace RamsLakeView.Services
             var operation = TableOperation.InsertOrMerge(entity);
             var result = await _table.ExecuteAsync(operation);
             if (result.HttpStatusCode == 204){
-                entriesCache.Add(entry.TransactionId, result.Result as MaintenanceEntryEntity);
+                if (!entriesCache.TryAdd(entry.TransactionId, result.Result as MaintenanceEntryEntity)) {
+                    entriesCache[entry.TransactionId] = result.Result as MaintenanceEntryEntity;
+                };
             }
             else{
                 Console.WriteLine(result.HttpStatusCode);
@@ -74,9 +76,10 @@ namespace RamsLakeView.Services
             var entries = new List<MaintenanceEntryFetchViewModel>();
 
             TableContinuationToken token = null;
+            TableQuerySegment<MaintenanceEntryEntity> qr;
             do
             {
-                var qr = await _table.ExecuteQuerySegmentedAsync(new TableQuery<MaintenanceEntryEntity>(), token);
+                 qr = await _table.ExecuteQuerySegmentedAsync(new TableQuery<MaintenanceEntryEntity>(), token);
                 var results = qr.Select(x => new MaintenanceEntryFetchViewModel()
                 {
                     Amount = x.Amount,
@@ -88,7 +91,15 @@ namespace RamsLakeView.Services
                 entries.AddRange(results);
 
             } while (token != null);
-            return entries;
+            var task = Task.Run(() =>
+            {
+                entriesCache.Clear();
+                foreach (var item in qr)
+                {
+                    entriesCache.Add(item.TransactionId, item);
+                }
+            });
+            return entries.OrderBy(x => x.Block).ToList();
         }
     }
 }
