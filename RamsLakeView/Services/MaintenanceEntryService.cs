@@ -55,8 +55,7 @@ namespace RamsLakeView.Services
             };
             entity.PartitionKey = partitionKey;
             entity.RowKey = entry.TransactionId;
-
-            // todo send to azure
+            // upload on azure 
             var operation = TableOperation.InsertOrMerge(entity);
             var result = await _table.ExecuteAsync(operation);
             if (result.HttpStatusCode == 204){
