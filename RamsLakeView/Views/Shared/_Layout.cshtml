@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/MvcGrid/mvc-grid.css" rel="stylesheet">
+</head>
+<body>
+    <div>
+        @RenderBody()
+        <script src="~/Scripts/MvcGrid/mvc-grid.js"></script>
+         <script>
+            $('.mvc-grid').mvcgrid();
+        </script>
+    </div>
+</body>
+</html>

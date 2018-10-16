@@ -1,0 +1,22 @@
+﻿
+@model IList<MaintenanceEntryFetchViewModel>
+@{
+    ViewBag.Title = "All Results";
+}
+<h2> Hello Mr. @User.Identity.Name below is Maintenance Ledger</h2>
+
+@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.Block).Titled("Amount");
+        columns.Add(model => model.FlatNumber).Titled("FlatNumber");
+
+        columns.Add(model => model.EntryDateTime).Titled("DateTime");
+        columns.Add(model => model.TransactionId).Titled("TransactionID");
+        columns.Add(model => model.Amount).Titled("Amount");
+    })
+    .Filterable()
+    .Sortable()
+    .Pageable()
+)

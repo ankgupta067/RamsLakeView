@@ -1,0 +1,7 @@
+﻿@using RamsLakeView.ViewModels
+@model FailureMessageEntryExistsViewModel
+@{ 
+    ViewBag.Title = "Allready Exists";
+}
+<h2>Entry Allready exist for @Model.TransactionId for Amount @Model.Amount,Created on @Model.dateTime
+    Recheck your TranactionId.</h2>

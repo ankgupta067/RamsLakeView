@@ -1,0 +1,39 @@
+﻿@using RamsLakeView.Models
+@model MaintenanceEntry
+@{ 
+    ViewBag.Title = "Make An Entry";
+}
+<h1> Make the entry  </h1>
+<form  method="post">
+    <table>
+        <tr>
+            <td>Block</td>
+            <td>
+                <select asp-for="Block"
+                        asp-items="@Html.GetEnumSelectList<BlockNumber>()"></select>
+            </td>
+        </tr>
+        <tr>
+            <td> Flat Number</td>
+            <td>
+                <input asp-for="FlatNumber"></input>
+            </td>
+        </tr>
+        <tr>
+            <td> TransactionId</td>
+            <td>
+                <input asp-for="TransactionId"></input>
+            </td>
+        </tr>
+        <tr>
+            <td>Amount</td>
+            <td>
+                <input asp-for="Amount"></input>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" name="Save" value="Save" />
+   
+    <div><a asp-action="Fetch" title="Only for treasurer">List all Records</a></div>
+</form>
+<div style="color:red" asp-validation-summary="All"></div>
