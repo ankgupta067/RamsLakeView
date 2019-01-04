@@ -18,7 +18,7 @@ namespace RamsLakeView.Services
         CloudTable _table;
         private IConfiguration _configuration;
         private string partitionKey = "RLMPartitionKey";
-
+        // Service
         public MaintenanceEntryService(IConfiguration configuration){
             _configuration = configuration;
             var sa = CloudStorageAccount.Parse(configuration["StorageConnectionString"]);
