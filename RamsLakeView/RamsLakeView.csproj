@@ -1,9 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <ApplicationInsightsResourceId>/subscriptions/77fc6109-16b2-4ea4-af75-e2eace4151ba/resourcegroups/RamsLakeView/providers/microsoft.insights/components/RamsLakeView</ApplicationInsightsResourceId>
-    <ApplicationInsightsAnnotationResourceId>/subscriptions/77fc6109-16b2-4ea4-af75-e2eace4151ba/resourcegroups/RamsLakeView/providers/microsoft.insights/components/RamsLakeView</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <ItemGroup>
